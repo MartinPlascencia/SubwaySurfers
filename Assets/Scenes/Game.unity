@@ -436,6 +436,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1625112388}
+        m_TargetAssemblyTypeName: JetpackPowerUp, Assembly-CSharp
+        m_MethodName: Deactivate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onGameLose:
     m_PersistentCalls:
       m_Calls:
@@ -507,7 +519,6 @@ MonoBehaviour:
   minPlatformsNumber: 5
   maxPlatformsNumber: 7
   powerUpPools:
-  - {fileID: 1955120795}
   - {fileID: 1131955396}
   powerUpOffset: 1
 --- !u!4 &127265634
@@ -560,6 +571,9 @@ MonoBehaviour:
   - {fileID: 653167748}
   securePlatformPrefabs:
   - {fileID: 499105708}
+  flyingPlatformPrefabs:
+  - {fileID: 1936174347}
+  flyingPlatformsHeight: 4.5
   initialPlatforms: 5
   minSpeed: 5
   maxSpeed: 15
@@ -2083,7 +2097,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c04110ad3beb8fd4fa335e35cc417f81, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2096,6 +2110,11 @@ PrefabInstance:
 --- !u!4 &977538331 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c04110ad3beb8fd4fa335e35cc417f81, type: 3}
+  m_PrefabInstance: {fileID: 977538330}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &977538332 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: c04110ad3beb8fd4fa335e35cc417f81, type: 3}
   m_PrefabInstance: {fileID: 977538330}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &997432261
@@ -2377,6 +2396,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8558791}
+  - {fileID: 1936174346}
   - {fileID: 653167749}
   - {fileID: 499105709}
   m_Father: {fileID: 0}
@@ -2619,6 +2639,22 @@ MonoBehaviour:
   obstacleTag: Obstacle
   coinTag: Coin
   jumpPowerUpTag: JumpPowerUp
+  jetpackTag: Jetpack
+  onJetpackCollected:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1625112388}
+        m_TargetAssemblyTypeName: JetpackPowerUp, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onMagnetCollected:
     m_PersistentCalls:
       m_Calls:
@@ -2848,6 +2884,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1625112387}
+  - component: {fileID: 1625112388}
   m_Layer: 0
   m_Name: JetpackPowerUp
   m_TagString: Untagged
@@ -2870,6 +2907,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 640454052}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1625112388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625112386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5b19ad0fbf1a5242b779490d1966418, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::JetpackPowerUp
+  flyingHeight: 4.5
+  character: {fileID: 1413790570}
+  jetPackAsset: {fileID: 977538332}
+  flyDuration: 5
+  onJetpackActivated:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 151891637}
+        m_TargetAssemblyTypeName: PlatformsManager, Assembly-CSharp
+        m_MethodName: InstantiateFlyingPlatform
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1413790568}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1628004707
 GameObject:
   m_ObjectHideFlags: 0
@@ -3352,6 +3420,51 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &1936174345
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1936174346}
+  - component: {fileID: 1936174347}
+  m_Layer: 0
+  m_Name: InstantiateFlyingPlatform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1936174346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936174345}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.02768, y: -2.0602, z: -5.98323}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1386251482}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1936174347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936174345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af65a0ceb89e8be478bede23257fe8cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InstantiatePoolObjects
+  prefab: {fileID: 6987448983257774626, guid: 4ff9787b65a78e046ae0e5e90ad67d5b, type: 3}
 --- !u!1 &1955120794
 GameObject:
   m_ObjectHideFlags: 0
